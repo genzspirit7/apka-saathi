@@ -4,12 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Apka Saathi - Your personal study companion</title>
-  <meta name="description" content="Apka Saathi: study tracker, quiz battles, events, leaderboard and student community in one Android app.">
+  <meta name="description" content="Apka Saathi: study tracker, quiz battles, events, leaderboard and student community. Download for Android and Windows.">
+  <!-- GOOGLE_VERIFICATION_TAG: Search Console will give you a <meta> line. Paste it right here. -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🎓</text></svg>">
   <style>
     :root {
       --purple: #6C35E8;
       --purple2: #9B63F6;
+      --win: #0F6CBD;
       --bg: #F7F8FC;
       --card: #FFFFFF;
       --text: #29263A;
@@ -41,7 +43,6 @@
     a { color: var(--purple); }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
 
-    /* header */
     header { padding: 18px 0; }
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 22px; }
     .logo {
@@ -50,7 +51,6 @@
       display: grid; place-items: center; font-size: 24px;
     }
 
-    /* hero */
     .hero {
       background: linear-gradient(135deg, #6330DD, #8651EF 55%, #B85BF0);
       color: #fff;
@@ -60,19 +60,22 @@
       box-shadow: 0 14px 34px rgba(108, 53, 232, .25);
     }
     .hero h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 42px); line-height: 1.15; }
-    .hero p { margin: 0 0 22px; max-width: 560px; opacity: .92; font-size: 17px; }
+    .hero p { margin: 0 0 22px; max-width: 580px; opacity: .92; font-size: 17px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       background: #fff; color: var(--purple);
-      font-weight: 800; font-size: 17px;
-      padding: 14px 26px; border-radius: 16px;
+      font-weight: 800; font-size: 16px;
+      padding: 14px 24px; border-radius: 16px;
       text-decoration: none; border: 0; cursor: pointer;
     }
     .btn:hover { transform: translateY(-1px); }
-    .btn.solid { background: var(--purple); color: #fff; width: 100%; justify-content: center; }
-    .note { font-size: 13px; opacity: .85; margin-top: 12px; }
+    .btn.ghost { background: rgba(255,255,255,.18); color: #fff; border: 1.5px solid rgba(255,255,255,.65); }
+    .btn.solid { background: var(--purple); color: #fff; width: 100%; }
+    .btn.solid.win { background: var(--win); }
+    .btn.disabled { opacity: .55; pointer-events: none; cursor: default; }
+    .note { font-size: 13px; opacity: .88; margin-top: 14px; }
 
-    /* layout: features on the side, download card on the other side */
     .layout { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: start; }
     h2 { font-size: 22px; margin: 0 0 14px; }
     .features { display: grid; gap: 12px; }
@@ -94,17 +97,20 @@
       border-radius: 22px; padding: 20px;
     }
     .card h2 { font-size: 19px; }
+    .card h3 { margin: 0 0 8px; font-size: 15px; }
+    .stack { display: grid; gap: 10px; }
     .meta { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 14px; margin: 0 0 16px; }
     .meta dt { color: var(--muted); }
     .meta dd { margin: 0; font-weight: 700; text-align: right; }
-    ol.steps { margin: 0; padding-left: 20px; font-size: 14px; }
-    ol.steps li { margin-bottom: 8px; }
+    ol.steps, ul.notes { margin: 0; padding-left: 20px; font-size: 14px; }
+    ol.steps li, ul.notes li { margin-bottom: 8px; }
+    .steps-title { margin: 14px 0 6px; font-size: 14px; font-weight: 800; }
+    .steps-title:first-of-type { margin-top: 0; }
     .warn {
       background: var(--soft); border-radius: 14px;
       padding: 12px 14px; font-size: 13px; color: var(--muted); margin-top: 12px;
     }
 
-    /* sections */
     section.block { margin-top: 34px; }
     details {
       background: var(--card); border: 1px solid var(--line);
@@ -112,7 +118,7 @@
     }
     summary { cursor: pointer; font-weight: 700; }
     details p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-    .privacy p, .privacy li { color: var(--muted); font-size: 14px; }
+    .privacy p { color: var(--muted); font-size: 14px; }
     footer { margin: 40px 0 28px; text-align: center; color: var(--muted); font-size: 13px; }
 
     @media (max-width: 860px) {
@@ -130,9 +136,12 @@
 
     <div class="hero">
       <h1>Your personal study companion 🚀</h1>
-      <p>Track your study time, earn XP, battle your friends in quizzes, join festival events and climb the leaderboard. All in one app.</p>
-      <a class="btn" data-download href="#">⬇️ Download for Android</a>
-      <div class="note">Free &bull; Android phones only &bull; Version <span data-version>1.0.0</span></div>
+      <p>Track your study time, earn XP, battle your friends in quizzes, join festival events and climb the leaderboard. Now for Android and Windows.</p>
+      <div class="buttons">
+        <a class="btn" data-android href="#">📱 Download for Android</a>
+        <a class="btn ghost" data-windows href="#">🪟 Download for Windows</a>
+      </div>
+      <div class="note">Free &bull; Latest version <span data-version>1.0.0</span> &bull; iPhone is not supported yet</div>
     </div>
 
     <div class="layout">
@@ -183,27 +192,43 @@
         </div>
       </main>
 
-      <!-- DOWNLOAD CARD -->
+      <!-- DOWNLOAD SIDE -->
       <aside id="download">
         <div class="card">
           <h2>Download Apka Saathi</h2>
           <dl class="meta">
             <dt>Version</dt><dd data-version>1.0.0</dd>
             <dt>Updated</dt><dd data-updated>November 2026</dd>
-            <dt id="sizeLabel" hidden>Size</dt><dd id="sizeValue" hidden></dd>
-            <dt>Works on</dt><dd>Android</dd>
+            <dt>Works on</dt><dd>Android &bull; Windows 10/11</dd>
           </dl>
-          <a class="btn solid" data-download href="#">⬇️ Download APK</a>
-          <div class="warn">iPhone is not supported yet. Please download only from this page.</div>
+          <div class="stack">
+            <a class="btn solid" data-android href="#">📱 Download for Android (.apk)</a>
+            <a class="btn solid win" data-windows href="#">🪟 Download for Windows (.zip)</a>
+          </div>
+          <div class="warn">Please download only from this page. iPhone is not supported yet.</div>
+        </div>
+
+        <div class="card" id="whatsnew" hidden>
+          <h2>What is new</h2>
+          <ul class="notes" id="notesList"></ul>
         </div>
 
         <div class="card">
           <h2>How to install</h2>
+          <div class="steps-title">📱 Android</div>
           <ol class="steps">
-            <li>Tap <b>Download APK</b> and wait for the download to finish.</li>
-            <li>Open the downloaded file. If Android asks, allow <b>Install unknown apps</b> for your browser or Files app.</li>
-            <li>If Google Play Protect shows a warning, tap <b>More details</b> and then <b>Install anyway</b>. This is normal for apps that are not on the Play Store yet.</li>
+            <li>Tap <b>Download for Android</b> and wait for the download to finish.</li>
+            <li>Open the file. If Android asks, allow <b>Install unknown apps</b> for your browser or Files app.</li>
+            <li>If Google Play Protect shows a warning, tap <b>More details</b> and then <b>Install anyway</b>.</li>
             <li>Open Apka Saathi, create your account and verify your email.</li>
+          </ol>
+          <div class="steps-title">🪟 Windows</div>
+          <ol class="steps">
+            <li>Click <b>Download for Windows</b> and wait for the .zip file.</li>
+            <li>Right-click the zip, choose <b>Extract All</b>, and extract it to a folder (do not run it from inside the zip).</li>
+            <li>Open the folder and double-click <b>apka_saathi.exe</b>.</li>
+            <li>If Windows shows &ldquo;Windows protected your PC&rdquo;, click <b>More info</b> and then <b>Run anyway</b>.</li>
+            <li>Create your account or log in. You can right-click the exe and choose <b>Send to &gt; Desktop (create shortcut)</b>.</li>
           </ol>
         </div>
       </aside>
@@ -217,15 +242,19 @@
       </details>
       <details>
         <summary>Why do I see a warning when installing?</summary>
-        <p>The app is shared as a direct download and is not on the Google Play Store yet, so Android and Play Protect ask for your confirmation. Only install the file from this page.</p>
+        <p>The app is shared as a direct download and is not in an app store yet, so Android (Play Protect) and Windows (SmartScreen) ask for your confirmation. Only install the file from this page.</p>
+      </details>
+      <details>
+        <summary>The Windows app does not open. What should I do?</summary>
+        <p>Make sure you extracted the whole zip and run the exe from the extracted folder. If it still does not open, install the free &ldquo;Microsoft Visual C++ Redistributable (x64)&rdquo; from Microsoft and try again.</p>
       </details>
       <details>
         <summary>How do I update the app?</summary>
-        <p>Download the newest APK from this page and install it over the old one. Your account and progress are saved online, so you do not lose them.</p>
+        <p>Android: download the newest APK from this page and install it over the old one. Windows: download the newest zip, extract it and use the new folder (you can delete the old one). Your account and progress are saved online, so you do not lose them.</p>
       </details>
       <details>
-        <summary>Can I use it on an iPhone?</summary>
-        <p>Not right now. The app is available for Android phones only.</p>
+        <summary>Can I use it on an iPhone or Mac?</summary>
+        <p>Not right now. The app is available for Android phones and Windows PCs.</p>
       </details>
     </section>
 
@@ -245,27 +274,50 @@
   </div>
 
   <script>
-    // ====== EDIT THESE VALUES ONLY ======
+    // ================= EDIT ONLY THIS PART =================
+    // Replace YOUR-USERNAME with your GitHub username.
+    // Keep the file names the same in every release, then these links
+    // always give the newest version and you never edit the links again.
     const CONFIG = {
-      // After you create the GitHub release, this link always points to the newest APK
-      // (keep the APK file name the same in every release).
-      apkUrl: "https://github.com/genzspirit7/apka-saathi/releases/latest/download/apka-saathi.apk",
+      androidUrl: "https://github.com/genzspirit7/apka-saathi/releases/latest/download/apka-saathi.apk",
+      windowsUrl: "",   // after you build Windows, put:
+                        // "https://github.com/YOUR-USERNAME/apka-saathi/releases/latest/download/apka-saathi-windows.zip"
       version: "1.0.0",
       updated: "November 2026",
-      size: "",                         // example: "45 MB" (leave empty to hide)
-      contactEmail: "aharshitatiwari02@gmail.com"
+      contactEmail: "aharshitatiwari02@gmail.com",
+      // Shown in the "What is new" box. Keep the list empty [] to hide the box.
+      notes: [
+        "Holi event with reward meter",
+        "XP, streak and leaderboard"
+      ]
     };
-    // ====================================
+    // =======================================================
 
-    document.querySelectorAll("[data-download]").forEach(function (a) { a.href = CONFIG.apkUrl; });
+    document.querySelectorAll("[data-android]").forEach(function (a) { a.href = CONFIG.androidUrl; });
+
+    document.querySelectorAll("[data-windows]").forEach(function (a) {
+      if (CONFIG.windowsUrl) {
+        a.href = CONFIG.windowsUrl;
+      } else {
+        a.removeAttribute("href");
+        a.setAttribute("aria-disabled", "true");
+        a.classList.add("disabled");
+        a.textContent = "🪟 Windows: coming soon";
+      }
+    });
+
     document.querySelectorAll("[data-version]").forEach(function (el) { el.textContent = CONFIG.version; });
     document.querySelectorAll("[data-updated]").forEach(function (el) { el.textContent = CONFIG.updated; });
     document.querySelectorAll("[data-contact]").forEach(function (a) { a.href = "mailto:" + CONFIG.contactEmail; });
-    if (CONFIG.size) {
-      document.getElementById("sizeLabel").hidden = false;
-      var sv = document.getElementById("sizeValue");
-      sv.hidden = false;
-      sv.textContent = CONFIG.size;
+
+    if (CONFIG.notes && CONFIG.notes.length) {
+      var list = document.getElementById("notesList");
+      CONFIG.notes.forEach(function (text) {
+        var li = document.createElement("li");
+        li.textContent = text;
+        list.appendChild(li);
+      });
+      document.getElementById("whatsnew").hidden = false;
     }
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
